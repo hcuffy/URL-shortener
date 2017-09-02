@@ -1,2 +1,2 @@
 # URL-shortener
-Shortens URL's
+Shortens URLs
