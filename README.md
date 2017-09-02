@@ -1,2 +1,1 @@
-# URL-shortener
-Shortens URLs
+# Backend Challenges boilerplate - package.json
