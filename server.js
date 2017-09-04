@@ -9,6 +9,17 @@ var fs = require('fs');
 var express = require('express');
 var app = express();
 
+/////////start
+
+var mongo = require('./datab.js');
+var shorten = require('./shorten.js');
+
+
+
+
+
+////////end
+
 if (!process.env.DISABLE_XORIGIN) {
   app.use(function(req, res, next) {
     var allowedOrigins = ['https://narrow-plane.gomix.me', 'https://www.freecodecamp.com'];
@@ -32,6 +43,8 @@ app.route('/_api/package.json')
       res.type('txt').send(data.toString());
     });
   });
+
+app.route('/new/*?').get(shorten.change);
   
 app.route('/')
     .get(function(req, res) {
