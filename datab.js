@@ -1,44 +1,42 @@
-
 var mongodb = require('mongodb');
-var url = 'hidden for now';
+var url = 'mongodb://short:HaveFun@ds123614.mlab.com:23614/shortener';
 var MongoClient = mongodb.MongoClient;
 var assert = require('assert');
+var database;
 
 
- MongoClient.connect(url, function (err, db) {
-  if (err) {
-    console.log('Unable to connect to the mongoDB server. Error:', err);
-  } else {
-    console.log('Connection to mongoDB established.');
+module.exports = {
 
-    
-     db.createCollection('addresslist', function(err, res) {
-    
-       if (err) throw err;
-       
-    console.log('Collection created!');
-   
-       //checking if the collection was really made
-       
-          var collectionInfo = db.collection('addresslist');
-            
-            collectionInfo.find({}).toArray(function(err, db) {
-               console.log(collectionInfo.name);
-            });
- 
-       module.exports.db = db;
-  
-      
-       
-       
-    db.close();
-       
-       
+    connectToServer: function (callback) {
+
+        MongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.log('Unable to connect to the mongoDB server. Error:', err);
+            } else {
+                console.log('Connection to mongoDB established.');
+
+                db.createCollection('addresslist', function (err, res) {
+
+                    if (err) throw err;
+
+                    database = db;
+
+                    console.log('Collection created!');
+
+                    /*var collectionInfo = database.collection('addresslist');
+                       
+                       collectionInfo.find({}).toArray(function(err, result) {
+                          console.log(result);
+                       });*/
+
+                    return callback(err);
+                });
+            }
         });
-   
-  }
-   
-});
 
+    },
 
-
+    getDB: function () {
+        return database;
+    }
+};
