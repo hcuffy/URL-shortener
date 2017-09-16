@@ -44,8 +44,12 @@ app.route('/_api/package.json')
     });
   });
 
-app.route('/new/*?').get(shorten.change);
+app.get('/create/*?', shorten.create);  
+
+//app.route('/get/*?').get(shorten.get);
   
+
+
 app.route('/')
     .get(function(req, res) {
 		  res.sendFile(process.cwd() + '/views/index.html');
