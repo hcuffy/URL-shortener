@@ -44,9 +44,9 @@ app.route('/_api/package.json')
     });
   });
 
-app.get('/create/*?', shorten.create);  
+app.get('/new/*?', shorten.new);  
 
-//app.route('/get/*?').get(shorten.get);
+app.get('/:shortform', shorten.get);
   
 
 
