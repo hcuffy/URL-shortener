@@ -1,5 +1,6 @@
 var mongodb = require('mongodb');
-var url = 'mongodb://short:HaveFun@ds123614.mlab.com:23614/shortener';
+var url = process.env.URL;
+var assert = require('assert');
 var MongoClient = mongodb.MongoClient;
 var database;
 
